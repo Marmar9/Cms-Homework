@@ -1,0 +1,46 @@
+@import '../../colors.scss';
+
+.login-form {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    h2 {
+        font-size: 18px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            margin-bottom: 20px;
+            border: 1px solid $border;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+        button {
+            border-radius: 6px;
+            padding: 6px 10px;
+            border: none;
+            background: $btn;
+            color: $white;
+            cursor: pointer;
+
+            &:hover {
+                background: $btnHover;
+            }
+        }
+    }
+    .error {
+        margin-top: 10px;
+        border: 1px solid $error;
+        padding: 10px;
+        color: $error;
+        font-size: 12px;
+        text-align: center;
+    }
+}

@@ -1,0 +1,57 @@
+.element {
+   display: flex;
+   width: 100%;
+   height: 120px;
+   .left {
+      background: #ff0000;
+      display: flex;
+      flex-direction: column;
+      flex: 2;
+      .name {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         
+         input {
+            flex: 1;
+
+            &:disabled {
+               background: #fff;
+               border: none;
+               text-align: center;
+               cursor: move;
+            }
+         }
+      }
+      .url {
+         flex: 1;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex: 1;
+         textarea {
+            height: 100%;
+            flex: 1;
+            resize: none;
+            overflow-y: scroll;
+
+            &:disabled {
+               background: #fff;
+               border: none;
+               text-align: center;
+               cursor: move;
+            }
+         }
+      }
+   }
+   .right {
+      width: 200px
+      
+   }
+
+
+}
+
+.disabled {
+   cursor: move;
+}
