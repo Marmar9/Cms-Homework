@@ -1,0 +1,18 @@
+// @import "@src/colors.scss";
+@import "../../../colors.scss";
+
+.boxes-dashboard {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+   .colors-pickers-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    
+     
+   }
+}
+

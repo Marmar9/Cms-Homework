@@ -7,17 +7,9 @@ import { SortableContext } from '@dnd-kit/sortable';
 import { verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable"
 import {restrictToVerticalAxis} from "@dnd-kit/modifiers"
 import { AppContext } from "../../../context/app.context";
-import { SliderImageType } from "../../../types/sliderContext";
-
+import {getRandomHexColor, generateRandomId  } from "../../../utils/utils"
+import { checkIfChangesSaved } from "./../../../utils/utils";
 // If you return to old value you dont need to save
-export function checkIfChangesSaved(newValue : Array<SliderImageType>) {
-  const newWithoutId = newValue.map((image)=> { return {name : image.name, url : image.url}})
-  const oldValue = localStorage.getItem("sliderImages") ? JSON.parse(localStorage.getItem("sliderImages") as string).map((image)=> { return {name : image.name, url : image.url}}) : [{name : "", url : ""}];
-  console.log("Old value: ",oldValue)
-  console.log("New value: ",newWithoutId)
-
-  return JSON.stringify(oldValue) === JSON.stringify(newWithoutId)
-}
 
 export default function SliderDashboard() {
     const {sliderImages, setSliderImages } = useContext(SliderContext);
@@ -29,7 +21,20 @@ export default function SliderDashboard() {
       
       setSliderImages(arrayMove(sliderImages, activeIndex, overIndex))
     }
-    console.log(sliderImages)
+    function handleNewImage() {
+      const newValue = [...sliderImages, {name : "", url : "", color : getRandomHexColor(),id : `${generateRandomId()}`}]
+            setSliderImages(newValue )
+               // Check if new value is the same as old value  
+                //  If true change state of unsaved to false
+            if (checkIfChangesSaved(newValue, "sliderImages")) {
+              console.log("Changes saved")
+              setUnsavedChanges(false)
+            }
+            else {
+              console.log("Changes not saved")
+              setUnsavedChanges(true)
+            }
+    }
 return ( <>
 
    <div className={styles["slider-dashboard"]}>
@@ -58,20 +63,7 @@ return ( <>
           </SortableContext>
           </DndContext>
           {/* Handle new image */}
-          <button onClick={()=> {
-            const newValue = [...sliderImages, {name : "", url : "", id : `${Math.random()}`}]
-            setSliderImages(newValue )
-               // Check if new value is the same as old value  
-                //  If true change state of unsaved to false
-            if (checkIfChangesSaved(newValue)) {
-              console.log("Changes saved")
-              setUnsavedChanges(false)
-            }
-            else {
-              console.log("Changes not saved")
-              setUnsavedChanges(true)
-            }
-          }}>Add image</button>
+          <button onClick={handleNewImage}>Add image</button>
         </div>
    </div>
    </>

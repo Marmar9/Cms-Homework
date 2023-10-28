@@ -1,17 +1,18 @@
 /* eslint-disable */
 import { createContext,  useState, ReactNode} from 'react';
-import {IsLoggedContextType, UnavedChangesContextType} from "../types/appContext"
+import {IsLoggedContextType, UnavedChangesContextType} from "@ts/appContextTypes"
 
 
 
 
-type AppContextType = IsLoggedContextType & UnavedChangesContextType;
+type AppContextType = IsLoggedContextType & UnavedChangesContextType
 
 const defaultState = {
    isLogged: true,
    setIsLogged: (isLogged : boolean) => {},
    unsavedChanges : false,
-   setUnsavedChanges: (unsavedChanges : boolean) => {}
+   setUnsavedChanges: (unsavedChanges : boolean) => {},
+
 
 } as AppContextType;
 
@@ -28,7 +29,7 @@ const AppContextProvider = ({ children }: AppContextProviderProps) => {
       isLogged,
       setIsLogged,
       unsavedChanges,
-      setUnsavedChanges
+      setUnsavedChanges,
    }
  return (
    <AppContext.Provider value={appContextValues}> {children} </AppContext.Provider>

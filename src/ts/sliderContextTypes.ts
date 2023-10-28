@@ -3,7 +3,9 @@ import { Dispatch, SetStateAction } from "react";
 export interface SliderImageType {
    name : string;
    url : string;
+   color : string;
    id : string;
+   
 }
 
 export interface SliderImagesContextType {
@@ -15,3 +17,4 @@ export interface ShowSliderContextType {
    slider: boolean;
    setSlider: Dispatch<SetStateAction<boolean>>;
 }
+

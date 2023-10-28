@@ -1,69 +1,72 @@
-@import './../../colors.scss';
-@import './../../mixins.scss';
+@import "./../../colors.scss";
+@import "./../../mixins.scss";
 
 .header-container {
-    background: $black;
+  background: $black;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  width: inherit;
+  top: 0;
+  box-shadow: 0px 6px 16px -4px rgba(66, 68, 90, 1);
+  border-radius: 0 0 6px 6px;
+  z-index: 999;
+  .logo {
+    font-size: 20px;
+    color: white;
+
+    span {
+      color: $gold;
+
+      @include tablet {
+        color: red;
+      }
+    }
+  }
+  .menu {
     display: flex;
-    justify-content: space-between;
-    position: sticky;
-    width: inherit;
-    top: 0;
-    box-shadow: 0px 6px 16px -4px rgba(66, 68, 90, 1);
-    border-radius: 0 0 6px 6px;
-    z-index: 999;
-    .logo {
-        font-size: 20px;
-        color: white;
+    list-style: none;
 
-        span {
-            color: $gold;
-
-            @include tablet {
-                color: red;
-            }
-        }
-    }
-    .menu {
+    .menu-element {
+      height: 55px;
+      width: 55px;
+      a {
+        height: 100%;
+        width: 100%;
         display: flex;
-        list-style: none;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: $white;
 
-        .menu-element {
-            height:55px;
-            width: 55px;
-            a {
-                height: 100%;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                color: $white;
-
-                &:hover {
-                    color: $gold;
-                    border-top: 2px solid $white;
-                    border-bottom: 2px solid $white;
-                }
-            }
+        &:hover {
+          color: $gold;
+          border-top: 2px solid $white;
+          border-bottom: 2px solid $white;
         }
-        .logout-element {
-            height:55px;
-            width: 55px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-top: 2px solid $black;
-            border-bottom: 2px solid $black;
-            &:hover {
-                color: $gold;
-                border-top: 2px solid $white;
-                border-bottom: 2px solid $white;
-                cursor: pointer;
-            }
-            .logout-icon {
-                width: 50%;
-                height: 50%;
-            }
-        }
+      }
     }
+    .logout-element {
+      height: 55px;
+      width: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-top: 2px solid $black;
+      border-bottom: 2px solid $black;
+      background: none;
+
+      &:hover {
+        color: $gold;
+        border-top: 2px solid $white;
+        border-bottom: 2px solid $white;
+        cursor: pointer;
+      }
+      .logout-icon {
+        width: 50%;
+        height: 50%;
+      }
+    }
+  }
 }

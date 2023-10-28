@@ -1,39 +1,15 @@
 // import './Boxes.scss';
-
+import styles from './Boxes.module.scss';
+import { useContext } from 'react';
+import { BoxesContext} from '@context/boxes.context';
+import Box from './Box';
 const Boxes = () => {
+    const {boxes} = useContext(BoxesContext);
+        console.log(boxes);
     return(
         <div id="boxes" className="container">
-            <div className="boxes">
-                <div className="box">
-                    <h2>Kurs HTML</h2>
-                    <ul>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                    </ul>
-                </div>
-                <div className="box">
-                    <h2>Kurs CSS</h2>
-                    <ul>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                    </ul>
-                </div>
-                <div className="box">
-                    <h2>Kurs JavaScript</h2>
-                    <ul>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                    </ul>
-                </div>
+            <div className={styles.boxes}>
+                {boxes.map((box)=> <Box key={box.id} box={box}/>)}
             </div>
         </div>
     )

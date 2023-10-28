@@ -4,24 +4,26 @@ import {CSS } from "@dnd-kit/utilities"
 import { useState, useEffect, useRef, useContext } from "react"
 import { SliderContext } from "../../../context/slider.context"
 import { AppContext } from "../../../context/app.context"
-import { checkIfChangesSaved } from "./SliderDashboard"
+import { checkIfChangesSaved } from "./../../../utils/utils";
+
 export default function SliderImage({image} : {image : {name : string, url : string, id : string}}) {
   const [disabled, setDisabled] = useState<boolean>(true)
   const componentRef = useRef<HTMLDivElement>(null);
   const {sliderImages, setSliderImages } = useContext(SliderContext);
-  const {setUnsavedChanges} = useContext(AppContext)
+  const {setUnsavedChanges, setIsLogged} = useContext(AppContext)
 
   // Handle disable 
   useEffect(() => {
+    setIsLogged(true)
     // Handle outside clicks on mounted state
-    function handleClickOutside(event : any) {
+    function handleClickOutside(event : MouseEvent) {
       console.log("Clicked outside component")
-      if (componentRef.current && !componentRef.current.contains(event.target)) {
+      if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
         setDisabled(true);
       }
     }
 
-    function handleKeyDown(event : any) {
+    function handleKeyDown(event : KeyboardEvent) {
       if (event.key === 'Escape' || event.key === 'Enter') {
         setDisabled(true);
         }
@@ -72,7 +74,7 @@ export default function SliderImage({image} : {image : {name : string, url : str
         setSliderImages(newSliderImages);
           // Check if new value is the same as saved one 
           //  If true change state of unsaved to false
-        if (checkIfChangesSaved(newSliderImages)) {
+        if (checkIfChangesSaved(newSliderImages, "sliderImages")) {
           console.log("Changes saved")
           setUnsavedChanges(false)
         }
@@ -93,10 +95,11 @@ export default function SliderImage({image} : {image : {name : string, url : str
           }
           return elemen;
         })
+
         setSliderImages(newSliderImages);
           // Check if new value is the same as saved one 
           //  If true change state of unsaved to false
-        if (checkIfChangesSaved(newSliderImages)) {
+        if (checkIfChangesSaved(newSliderImages, "sliderImages")) {
           console.log("Changes saved")
           setUnsavedChanges(false)
         }
@@ -117,7 +120,7 @@ export default function SliderImage({image} : {image : {name : string, url : str
       // Check if new value is the same as saved one 
        setSliderImages(newSliderImages);
       //  If true change state of unsaved to false
-        if (checkIfChangesSaved(newSliderImages)) {
+        if (checkIfChangesSaved(newSliderImages, "sliderImages")) {
           console.log("Changes saved")
           setUnsavedChanges(false)
         }
@@ -127,6 +130,7 @@ export default function SliderImage({image} : {image : {name : string, url : str
         }
 
     }} disabled={disabled} className={`${disabled && styles.disabled}`}>Delete</button>
+    <input type="color" name="" className={styles["color-input"]} />
     </div>
 
 )
